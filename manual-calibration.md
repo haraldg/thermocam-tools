@@ -63,7 +63,7 @@ in such an experiment. The colder object is wet ice and then other is at
 21.6°C. As you can see, the offset has quite some drift, while the
 difference between reference bodies (related to slope) is quite constant:
 
-<img src="https://raw.githubusercontent.com/haraldg/thermocam-tools/master/images/calibration_raw_values.svg" />
+<img src="https://raw.githubusercontent.com/haraldg/thermocam-tools/master/images/calibration_raw_values.png" />
 
 The data was extracted using the following [gmic](https://gmic.eu) command
 line in a semi-manual way. For each image on the command line, the user
@@ -79,7 +79,7 @@ slope together with a linear regression fit. As you can see, there is some
 trend for slope to become higher over time, but it is mostly within noise
 level.
 
-<img src="https://raw.githubusercontent.com/haraldg/thermocam-tools/master/images/calibration_slope.svg" />
+<img src="https://raw.githubusercontent.com/haraldg/thermocam-tools/master/images/calibration_slope.png" />
 
 Most slope values are within 5% of the mean. Thus when the
 reference temperature is 0°C, the error at 20°C is about 1K. It is
