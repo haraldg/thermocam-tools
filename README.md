@@ -72,3 +72,16 @@ commands to operate on the set of open images. This allows for further
 post processing like noise filtering or saving to different image formats.
 
 To quit the interpreter loop, press CTRL+D (end of file).
+
+
+## Suggested workflow
+
+I have the thermocam configured to show the current time on the display.
+Whenever I take an image of a reference body (usually wet ice), I note down
+the time after that on paper. After moving the images from the thermocam
+to my computer, I use the list on paper to locate all images of a
+reference body in the file manager and rename them from `YYYYMMDDhhmmss.DAT`
+to `YYYYMMDDhhmmss_ice.DAT`. Then I run
+```
+dat2temp.py -s 0.047 --ref ice -t 0.0 *.DAT
+```
