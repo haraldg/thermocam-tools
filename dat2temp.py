@@ -46,6 +46,7 @@ def convert(name, temperature, offset, slope):
 	src = readdat(name)
 	dest = (temperature + (src - offset) * slope).astype(np.float32)
 	dest.tofile(name[:-3]+"raw")
+	print name, "using raw value", offset, "for temperature", temperature
 
 	return dest
 
