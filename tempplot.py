@@ -57,6 +57,7 @@ if __name__ == "__main__":
 	parser.add_argument('filenames', nargs='+')
 	args = parser.parse_args()
 	plt.imshow(tile(args.c, args.filenames))
+	plt.axis('off')
 	plt.colorbar()
 	if args.t:
 		plt.title(args.t)
