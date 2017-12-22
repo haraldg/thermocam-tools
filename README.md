@@ -50,18 +50,21 @@ since the program currently only performs offset calibration, you need to
 at least specify the `--slope` parameter.
 
 
-### tempplot.py - explore and plot a temperature file
+### tempplot.py - explore and plot a temperature files
 
-Plots the specified temperature file with matplotlib.pyplot for interactive
+Plots the specified temperature files with matplotlib.pyplot for interactive
 exploration. You can save the plot as `*.png` file from the plot window.
+If you specify more then one file, all will be shown in the same plot with
+one common color map.
 
 Command line options:
 
 * `--cmap`: specify a color map (whatever matplotlib supports)
+* `--columns`: the number of files to show in one row
 * `--title`: a plot title.
 
 
-### tempviewer - explore and post process a temperature file with gmic
+### tempviewer - explore and post process temperature files with gmic
 
 Any command line argument is expected to be a temperature file. All
 temperature files are shown as thumbnails. Selecting (clicking) one
