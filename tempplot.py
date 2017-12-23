@@ -49,6 +49,28 @@ def tile(cols, files):
 
 	return d
 
+def merge_cmaps(boundaries, maps):
+	from matplotlib.colors import LinearSegmentedColormap
+
+	def create_data(l, h, m):
+		r = []
+		for v in range(m.N):
+			v = float(v) / (m.N-1)
+			r.append(((1-v)*l + v*h, m(v)))
+		return r
+
+	low = 0.0
+	result = []
+	for m in maps:
+		if boundaries:
+			high = boundaries.pop(0)
+		else:
+			high = 1.0
+		result += create_data(low, high, m)
+		low = high
+
+	return LinearSegmentedColormap.from_list("merged", result, N=len(result))
+
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description='Display raw temperature file for exploring interactively')
 	parser.add_argument('--cmap', dest='cmap', default='coolwarm')
