@@ -71,17 +71,50 @@ def merge_cmaps(boundaries, maps):
 
 	return LinearSegmentedColormap.from_list("merged", result, N=len(result))
 
+
+def colorspec(str, data):
+	from matplotlib import cm
+	from matplotlib.colors import Normalize
+	boundaries = []
+	cmaps = []
+	vmin = None
+	vmax = None
+	xs = str.split(' ')
+	try:
+		vmin = float(xs[0])
+		xs.pop(0)
+	except:
+		pass
+	while len(xs) > 1:
+		cmaps.append(cm.get_cmap(xs.pop(0)))
+		boundaries.append(float(xs.pop(0)))
+
+	if xs:
+		cmaps.append(cm.get_cmap(xs[0]))
+	else:
+		vmax = boundaries.pop()
+
+	norm = Normalize(vmin=vmin, vmax=vmax)
+	norm.autoscale_None(data)
+
+	return norm, merge_cmaps(map(norm, boundaries), cmaps)
+
 if __name__ == "__main__":
-	parser = argparse.ArgumentParser(description='Display raw temperature file for exploring interactively')
-	parser.add_argument('--cmap', dest='cmap', default='coolwarm')
+	parser = argparse.ArgumentParser(
+		description='Display raw temperature files for exploring interactively',
+		epilog='Example:\ntempplot.py --cmap "cool 12.6 coolwarm" test.raw')
+	parser.add_argument('--cmap', dest='cmap', default='coolwarm',
+		metavar='[min] cmap [temp cmap [...]] [max]')
 	parser.add_argument('--title', '-t', dest='t')
-	parser.add_argument('--columns', '-c', dest='c')
+	parser.add_argument('--columns', '-c', dest='c', help='number of images in per row')
 	parser.add_argument('filenames', nargs='+')
 	args = parser.parse_args()
-	plt.imshow(tile(args.c, args.filenames))
+
+	data = tile(args.c, args.filenames)
+	norm, cmap = colorspec(args.cmap, data)
+	plt.imshow(data, norm=norm, cmap=cmap)
 	plt.axis('off')
 	plt.colorbar()
 	if args.t:
 		plt.title(args.t)
-	plt.set_cmap(args.cmap)
 	plt.show()
