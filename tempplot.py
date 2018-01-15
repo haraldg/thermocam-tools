@@ -28,6 +28,8 @@ def tile(cols, files):
 		cols = sqrt(count)
 		if not cols.is_integer():
 			cols = int(cols) + 1
+		else:
+			cols = int(cols)
 
 	rows = count / cols
 	if count % cols != 0:
@@ -106,7 +108,7 @@ if __name__ == "__main__":
 	parser.add_argument('--cmap', dest='cmap', default='coolwarm',
 		metavar='[min] cmap [temp cmap [...]] [max]')
 	parser.add_argument('--title', '-t', dest='t')
-	parser.add_argument('--columns', '-c', dest='c', help='number of images in per row')
+	parser.add_argument('--columns', '-c', dest='c', type=int, help='number of images in per row')
 	parser.add_argument('filenames', nargs='+')
 	args = parser.parse_args()
 
