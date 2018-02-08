@@ -31,7 +31,10 @@ def getcoldvalue(img):
 
 def timestamp(name):
 	"""Return the timestamp part of a filename as seconds since epoch."""
-	return time.mktime(time.strptime(name[:14], '%Y%m%d%H%M%S'))
+	try:
+		return time.mktime(time.strptime(name[:14], '%Y%m%d%H%M%S'))
+	except:
+		return 0
 
 def calibrate(names, selector):
 	times = []
