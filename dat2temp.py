@@ -1,23 +1,11 @@
 #!/usr/bin/env python
 
+from datinfo import readdat
 from scipy.interpolate import interp1d
 import numpy as np
 import scipy.ndimage as ndimage
-import os
 import argparse
 import time
-
-def readdat(name):
-	"""Read DIY-Thermocam dat-files and return thermal data als array."""
-	if os.path.getsize(name) >= 38400:
-		shape = (120,160)
-	else:
-		shape = (60,80)
-
-	d = np.fromfile(name, np.dtype('>i2'), count=shape[0]*shape[1])
-	d.shape = shape
-
-	return d
 
 def getcoldvalue(img):
 	"""Return the average value of the coldes areas of an image."""
@@ -40,6 +28,7 @@ def calibrate(names, selector):
 	times = []
 	values = []
 	for name in names:
+		print name
 		times.append(timestamp(name))
 		values.append(selector(readdat(name)))
 

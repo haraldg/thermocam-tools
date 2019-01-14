@@ -50,6 +50,13 @@ since the program currently only performs offset calibration, you need to
 at least specify the `--slope` parameter.
 
 
+### datinfo.py - show min/max raw values of each file
+
+This is meant to provide the info necessary to manually tweak offset/slope
+calibration. Currently it only works on raw values without any filtering
+or processing.
+
+
 ### tempplot.py - explore and plot a temperature files
 
 Plots the specified temperature files with matplotlib.pyplot for interactive
