@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from datinfo import readdat
 from scipy.interpolate import interp1d
@@ -13,7 +13,7 @@ def getcoldvalue(img):
 	mask = blur < (blur.min() + 10)
 	mask_count = mask.sum()
 	if mask_count < 500:
-		raise RuntimeError, "found less then 500 cold pixels"
+		raise RuntimeError("found less then 500 cold pixels")
 
 	return (blur*mask).sum()/mask_count
 
@@ -28,7 +28,7 @@ def calibrate(names, selector):
 	times = []
 	values = []
 	for name in names:
-		print name
+		print(name)
 		times.append(timestamp(name))
 		values.append(selector(readdat(name)))
 
@@ -38,7 +38,7 @@ def convert(name, temperature, offset, slope):
 	src = readdat(name)
 	dest = (temperature + (src - offset) * slope).astype(np.float32)
 	dest.tofile(name[:-3]+"raw")
-	print name, "using raw value", offset, "for temperature", temperature
+	print(name, "using raw value", offset, "for temperature", temperature)
 
 	return dest
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import argparse
 import matplotlib.pyplot as plt
@@ -99,7 +99,7 @@ def colorspec(str, data):
 	norm = Normalize(vmin=vmin, vmax=vmax)
 	norm.autoscale_None(data)
 
-	return norm, merge_cmaps(map(norm, boundaries), cmaps)
+	return norm, merge_cmaps(list(map(norm, boundaries)), cmaps)
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(
