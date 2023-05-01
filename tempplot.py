@@ -4,7 +4,7 @@ import argparse
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-from math import sqrt
+from math import sqrt, ceil
 
 def readraw(name):
 	"""Read file with floating point temperature values."""
@@ -31,9 +31,7 @@ def tile(cols, files):
 		else:
 			cols = int(cols)
 
-	rows = count / cols
-	if count % cols != 0:
-		rows += 1
+	rows = ceil(count / cols)
 
 	d = np.empty((120*rows, 160*cols))
 	average = None
