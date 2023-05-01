@@ -24,6 +24,9 @@ def timestamp(name):
 	except:
 		return 0
 
+def get_offset(raw_value, temp_value, slope, temperature=0.0):
+	return raw_value - (temp_value - temperature) / slope
+
 def calibrate(names, selector):
 	times = []
 	values = []
@@ -51,8 +54,10 @@ def process_files(names, slope, ref="ice", temperature=0.0, offset=None):
 				refs.append(name)
 
 		o = calibrate(refs, getcoldvalue)
-	else:
+	elif isinstance(offset, (int, float)):
 		o = lambda t: offset
+	else:
+		o = offset
 
 	for name in names:
 		convert(name, temperature, o(timestamp(name)), slope)
